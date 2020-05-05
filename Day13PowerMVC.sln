@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30002.166
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day13PowerMVC", "Day13PowerMVC\Day13PowerMVC.csproj", "{FA6EB9D1-84B7-4086-97DB-ECCDFCF9B96B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{3877CB0F-61B3-43C8-9852-441FAA6A56AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{1277A595-5A8E-43A1-B8B8-E424A06280D0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA6EB9D1-84B7-4086-97DB-ECCDFCF9B96B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA6EB9D1-84B7-4086-97DB-ECCDFCF9B96B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA6EB9D1-84B7-4086-97DB-ECCDFCF9B96B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA6EB9D1-84B7-4086-97DB-ECCDFCF9B96B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3877CB0F-61B3-43C8-9852-441FAA6A56AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3877CB0F-61B3-43C8-9852-441FAA6A56AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3877CB0F-61B3-43C8-9852-441FAA6A56AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3877CB0F-61B3-43C8-9852-441FAA6A56AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1277A595-5A8E-43A1-B8B8-E424A06280D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1277A595-5A8E-43A1-B8B8-E424A06280D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1277A595-5A8E-43A1-B8B8-E424A06280D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1277A595-5A8E-43A1-B8B8-E424A06280D0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09431D64-8C74-47D3-8FD7-C1E227EF70CE}
+	EndGlobalSection
+EndGlobal

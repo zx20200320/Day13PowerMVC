@@ -1,0 +1,166 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Show</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Content/jquery-3.3.1.js"></script>
+    <style>
+        #div1{
+            width:600px;
+            padding:20px;
+            margin:auto;
+            margin-top:10px;
+            border:2px solid black;
+        }
+        #div2 {
+            width: 556px;
+            height: 100px;
+            padding:10px;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1"> 
+        <h2>雇员表</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>雇员姓名</th>
+                    <th>角色</th>
+                </tr>
+            </thead>
+            <tbody id="tab"></tbody>
+        </table>
+        <div id="div2">
+            <h3>为“<span id="UName"></span>”分配角色</h3>
+            <select id="RList"></select>
+            <input id="Button1" type="button" value=">>" onclick="btnAddPower()" />
+            <input id="Button1" type="button" value="<<" onclick="btnDelPower()" />
+            <select id="PList">
+                <option value="0">当前雇员所属角色</option>
+            </select>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    $(function () {
+        show();
+        dropRole();
+    })
+
+    function show() {
+        $.ajax({
+            url: "/User/UserRoleList",
+            type: "get",
+            success: function (data) {
+                $("#tab").empty();
+                $(data).each(function () {
+                    var rname = "";
+                    if (this.RName != null) {
+                        rname = this.RName;
+                    }
+                    var str = '<tr>'
+                        + '<td>' + this.UId + '</td>'
+                        + '<td>' + this.UName + '</td>'
+                        + '<td>' + rname + '</td>'
+                        + '<td><a href="javascript:setRole(\'' + this.UName + '\',' + this.UId + ')">设置角色</a></td>'
+                        + '</tr>';
+                    $("#tab").append(str);
+                })
+            }
+        })
+    }
+
+    function dropRole() {
+        $.ajax({
+            url: "/User/RoleList",
+            type: "get",
+            success: function (data) {
+                $("#RList").empty();
+                $("#RList").append('<option value="0">所有可选角色</option>');
+                $(data).each(function () {
+                    $("#RList").append('<option value="' + this.RId + '">' + this.RName + '</option>');
+                })
+            }
+        })
+    }
+
+    function setRole(uName,uId) {
+        $("#UName").text(uName);
+        localStorage["userId"] = uId;
+        dropUserRole();
+    }
+
+    function dropUserRole() {
+        $.ajax({
+            url: "/User/PowerList?uId=" + localStorage["userId"],
+            type: "get",
+            success: function (data) {
+                $("#PList").empty();
+                $("#PList").append('<option value="0">当前雇员所属角色</option>');
+                $(data).each(function () {
+                    $("#PList").append('<option value="' + this.RId + '">' + this.RName + '</option>');
+                })
+            }
+        })
+    }
+
+    function btnAddPower() {
+        var rId = $("#RList").val();
+        if (rId == 0) {
+            alert("请选择角色!");
+            return;
+        }
+        if ($("#UName").text()=="") {
+            alert("请选择用户!");
+            return;
+        }
+        var obj = {};
+        obj.UId = localStorage["userId"];
+        obj.RId = rId;
+        $.ajax({
+            url: "/User/AddUserRole",
+            data: obj,
+            type: "post",
+            success: function (data) {
+                if (data > 0) {
+                    alert("分配成功!");
+                    show();
+                    dropUserRole();
+                }
+            }
+        })
+    }
+
+    function btnDelPower() {
+        var RId = $("#PList").val();
+        if ($("#UName").text() == "") {
+            alert("请选择用户!");
+            return;
+        }
+        if (RId == 0) {
+            alert("请选择要取消的角色!");
+            return;
+        }
+        $.ajax({
+            url: "/User/DelUserRole?uId=" + localStorage["userId"] + "&rId=" + RId,
+            type: "post",
+            success: function (data) {
+                if (data > 0) {
+                    alert("解除权限成功!");
+                    show();
+                    dropUserRole();
+                }
+            }
+        })
+    }
+</script>
